@@ -4,6 +4,7 @@ function fn(impl = () => {}) {
     return impl(...args)
   }
   mockFn.mock = {calls: []}
+  mockFn.mockReset = () => delete require.cache[utilsPath]
   return mockFn
 }
 
@@ -29,4 +30,4 @@ assert.deepStrictEqual(utils.getWinner.mock.calls, [
 ])
 
 // cleanup
-delete require.cache[utilsPath]
+utils.getWinner.mockReset()
